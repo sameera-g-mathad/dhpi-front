@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/debug.log
+.gitignore
+/.eslintcache
+/public/favicon.ico
+
+/src/reportWebVitals.js
