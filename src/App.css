@@ -17,6 +17,10 @@ body {
 }
 .title {
   font-family: 'Pacifico', cursive;
+  transition: display 2s;
+}
+.sub-title {
+  font-family: 'Caveat', cursive;
 }
 .home-content {
   grid-column: 1/-1;
@@ -49,19 +53,20 @@ textarea {
 
 .login {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   align-content: center;
+  padding: 20px;
 }
 .login-display {
   grid-column: 1/3;
 }
 .login-form {
-  grid-column: 4/-1;
+  grid-column: 3/-1;
 }
 @media (max-width: 500px) {
   .login {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
   }
 }

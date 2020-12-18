@@ -7,7 +7,9 @@ const reducer = (state, action) => {
     case 'logged':
       return { ...state, token: action.payload._id, name: action.payload.user };
     case 'posts':
-      return { ...state, posts: [...action.payload] };
+      return { ...state, posts: action.payload };
+    case 'logged_out':
+      return { ...state, posts: [], token: '', name: '' };
     default:
       return state;
   }
@@ -29,7 +31,6 @@ export const DairyProvider = ({ children }) => {
     try {
       const res = await axios.post('/', { name, password });
       const { _id, name: user } = res.data.user;
-
       if (res.status === 200) {
         dispatch({ type: 'logged', payload: { _id, user } });
         sessionStorage.setItem('token', JSON.stringify(_id));
@@ -40,19 +41,22 @@ export const DairyProvider = ({ children }) => {
       console.log(err);
     }
   };
-  const getPosts = async () => {
+  const getPosts = async (token) => {
     try {
-      const res = await axios.get('/view_dairy', { _id: state.token });
+      if (token !== undefined) {
+        const res = await axios.post('/view_dairy', { _id: token });
 
-      const posts = res.data.posts.dairy;
-
-      dispatch({ type: 'posts', payload: posts });
+        const posts = res.data.posts.dairy;
+        console.log(posts);
+        dispatch({ type: 'posts', payload: posts });
+      }
     } catch (err) {
-      console.log(err.response.data);
+      console.log(err);
     }
   };
   const addPosts = async (title, description, navigate) => {
     try {
+      authenticated();
       const res = await axios.post('/add_note', {
         _id: state.token,
         posts: { title, description },
@@ -76,9 +80,33 @@ export const DairyProvider = ({ children }) => {
       console.log(err.response.data);
     }
   };
+  const editPosts = async (_id, edit_id, posts, navigate) => {
+    try {
+      const res = await axios.patch('/edit_note', { _id, edit_id, posts });
+      //console.log(res);
+      if (res.status === 200) {
+        navigate();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const logout = () => {
+    sessionStorage.clear();
+    dispatch({ type: 'logged_out' });
+  };
   return (
     <DairyContext.Provider
-      value={{ state, addPosts, login, authenticated, getPosts, deletePost }}
+      value={{
+        state,
+        addPosts,
+        login,
+        authenticated,
+        getPosts,
+        deletePost,
+        editPosts,
+        logout,
+      }}
     >
       {children}
     </DairyContext.Provider>

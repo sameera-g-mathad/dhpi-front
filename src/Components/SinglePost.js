@@ -4,10 +4,14 @@ import { FaEdit } from 'react-icons/fa';
 import { GrLinkNext } from 'react-icons/gr';
 import DairyContext from '../Context/dairyContext';
 import { Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
+import { Link, useHistory } from 'react-router-dom';
 export const SinglePost = (props) => {
-  const { deletePost } = useContext(DairyContext);
+  console.log(props);
+  const { state, deletePost } = useContext(DairyContext);
   const [open, setOpen] = useState(false);
   const { el } = props;
+  const { token } = state;
+  const history = useHistory();
   let description = [],
     arr = [],
     string = '';
@@ -29,19 +33,36 @@ export const SinglePost = (props) => {
           <button className="focus:outline-none" onClick={() => setOpen(true)}>
             <MdDelete />
           </button>
-          <FaEdit />
+          <Link
+            className="focus:outline-none"
+            to={{
+              pathname: '/edit_note',
+              state: { el, id: token },
+            }}
+          >
+            <FaEdit />
+          </Link>
         </span>
       </span>
-      <span className="h-32 py-2 overflow-y-hidden ">
+      <span className="h-32 py-2 overflow-y-hidden flex flex-wrap ">
         {arr.length === 0 ? el.description : string + '...'}
       </span>
       <span className="flex justify-end">
-        <button className="px-4 font-semibold tracking-wider capitalize">
+        <Link
+          to={{
+            pathname: `/view_dairy/${el._id}`,
+            state: {
+              title: el.title,
+              description: el.description,
+            },
+          }}
+          className="px-4  font-semibold tracking-wider capitalize"
+        >
           <span className="flex items-center justify-between w-16">
             <span>view</span>
             <GrLinkNext />
           </span>
-        </button>
+        </Link>
       </span>
       <Modal centered={true} isOpen={open}>
         <ModalHeader className="text-lg font-bold">Are you sure?</ModalHeader>
@@ -52,7 +73,7 @@ export const SinglePost = (props) => {
           <button
             onClick={() => {
               deletePost(el._id);
-              window.location.reload(false);
+              history.go(0);
             }}
             className="px-4 font-semibold tracking-wider capitalize"
           >
