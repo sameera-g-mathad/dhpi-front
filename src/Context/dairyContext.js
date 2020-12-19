@@ -19,6 +19,8 @@ export const DairyProvider = ({ children }) => {
     posts: [],
     token: '',
     name: '',
+    bg: 'bg-blue-300',
+    text: 'text-blue-600',
   });
 
   const authenticated = () => {
