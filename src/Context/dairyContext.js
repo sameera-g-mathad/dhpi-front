@@ -19,8 +19,6 @@ export const DairyProvider = ({ children }) => {
     posts: [],
     token: '',
     name: '',
-    bg: 'bg-blue-300',
-    text: 'text-blue-600',
   });
 
   const authenticated = () => {
@@ -49,7 +47,6 @@ export const DairyProvider = ({ children }) => {
         const res = await axios.post('/view_dairy', { _id: token });
 
         const posts = res.data.posts.dairy;
-        console.log(posts);
         dispatch({ type: 'posts', payload: posts });
       }
     } catch (err) {
@@ -70,14 +67,14 @@ export const DairyProvider = ({ children }) => {
       console.log(err.response.data);
     }
   };
-  const deletePost = async (id) => {
-    console.log(id, state.token);
+  const deletePost = async (id, navigate) => {
     try {
       const res = await axios.patch('/view_dairy', {
         _id: state.token,
         dairy_id: id,
       });
       console.log(res);
+      navigate();
     } catch (err) {
       console.log(err.response.data);
     }
@@ -94,7 +91,8 @@ export const DairyProvider = ({ children }) => {
     }
   };
   const logout = () => {
-    sessionStorage.clear();
+    sessionStorage.removeItem('name');
+    sessionStorage.removeItem('token');
     dispatch({ type: 'logged_out' });
   };
   return (

@@ -5,11 +5,14 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { DairyProvider } from './Context/dairyContext';
+import { ColorProvider } from './Context/colorContext';
 
 ReactDOM.render(
   <Router>
     <DairyProvider>
-      <App />
+      <ColorProvider>
+        <App />
+      </ColorProvider>
     </DairyProvider>
   </Router>,
   document.getElementById('root')

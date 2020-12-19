@@ -25,6 +25,7 @@ yarn-error.log*
 /debug.log
 .gitignore
 /.eslintcache
-/public/favicon.ico
+public/favicon.ico
 
 /src/reportWebVitals.js
+public/undraw_Specs_djh3 1 (1).svg

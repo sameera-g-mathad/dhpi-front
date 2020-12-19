@@ -8,3 +8,4 @@ export * from './SinglePost';
 export * from './ViewPost';
 export * from './EditPost';
 export * from './Dairy';
+export * from './Settings';
