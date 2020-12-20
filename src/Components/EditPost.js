@@ -6,6 +6,7 @@ import DairyContext from '../Context/dairyContext.js';
 import ColorContext from './../Context/colorContext';
 
 export const EditPost = (props) => {
+  //getting token(id) and individual element from Link
   const { el, token } = props.history.location.state;
   const [title, setTitle] = useState(el.title);
   const [description, setDescription] = useState(el.description);
@@ -45,7 +46,7 @@ export const EditPost = (props) => {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Input>
-          <span className="text-red-500 font-semibold capitalize tracking-wide">
+          <span className="font-semibold tracking-wide text-red-500 capitalize">
             {warning}
           </span>
           <span className="flex justify-end my-2">

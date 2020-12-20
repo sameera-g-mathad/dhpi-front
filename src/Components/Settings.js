@@ -5,11 +5,12 @@ import { AiFillSetting } from 'react-icons/ai';
 export const Settings = () => {
   const { color, changeTheme, darkTheme } = useContext(ColorContext);
   const [open, setOpen] = useState(false);
+  //consists of all theme related operations
   return (
     <>
       <div className="absolute right-0 -top-4">
         <button
-          className=" focus:outline-none  "
+          className=" focus:outline-none"
           onClick={() => setOpen(!open)}
         >
           <span className="text-2xl">

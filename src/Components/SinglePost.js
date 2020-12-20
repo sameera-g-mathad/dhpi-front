@@ -15,6 +15,7 @@ export const SinglePost = (props) => {
   let description = [],
     arr = [],
     string = '';
+  //to truncate text to display few lines on home page
   if (el.description.length > 20) {
     description = el.description.split(' ');
     arr = description.slice(0, 20);

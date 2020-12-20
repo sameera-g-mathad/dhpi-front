@@ -2,6 +2,8 @@ import React, { createContext, useReducer } from 'react';
 import axios from './../axios';
 const DairyContext = createContext();
 
+//context consisting of all requests related operations
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'logged':

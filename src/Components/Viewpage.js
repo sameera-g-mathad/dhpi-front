@@ -11,6 +11,7 @@ export const Viewpage = () => {
   const [sort, setSort] = useState(1);
   const [filter, setFilter] = useState('Today');
   const history = useHistory();
+  //To check user authentication on reload
   useEffect(() => {
     authenticated();
     // eslint-disable-next-line
@@ -22,7 +23,7 @@ export const Viewpage = () => {
       <Navbar />
       <div className={`pr-2 ${color.bg} home-content overflow-x-hidden`}>
         <div>
-          <span className="flex justify-end items-center py-2">
+          <span className="flex items-center justify-end py-2">
             <span>
               <Link
                 to="/add_note"
@@ -31,7 +32,7 @@ export const Viewpage = () => {
                 new thoughts ?
               </Link>
             </span>
-            <span className="ml-2 flex">
+            <span className="flex ml-2">
               <span className="ml-2">
                 <select
                   className={`font-semibold p-2 rounded-lg focus:outline-none tracking-wide capitalize ${color.text} w-24`}

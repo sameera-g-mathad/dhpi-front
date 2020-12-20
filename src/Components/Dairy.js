@@ -3,6 +3,7 @@ import ColorContext from './../Context/colorContext';
 export const Dairy = () => {
   const { color } = useContext(ColorContext);
   return (
+    //svg for browser display
     <>
       <svg
         width="200"

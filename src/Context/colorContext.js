@@ -2,6 +2,8 @@ import React, { createContext, useReducer, useEffect } from 'react';
 
 const ColorCoxtext = createContext();
 
+//context conisting all theme related operations
+
 const reducer = (color, action) => {
   switch (action.type) {
     case 'change_theme': {
@@ -28,6 +30,7 @@ export const ColorProvider = ({ children }) => {
     text: 'text-blue-600',
     border: 'border-blue-500',
   });
+  //to check theme on reload of browser
   useEffect(() => {
     const parse = JSON.parse(sessionStorage.getItem('color'));
     if (parse === null) {
