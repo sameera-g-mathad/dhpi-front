@@ -84,7 +84,7 @@ export const SinglePost = (props) => {
         <ModalFooter className={` ${color.bg}`}>
           <button
             onClick={() => {
-              deletePost(el._id, () => history.go(0));
+              deletePost(el._id, () => window.location.reload(false));
             }}
             className={`px-4 font-semibold tracking-wider capitalize ${color.text} focus:outline-none`}
           >

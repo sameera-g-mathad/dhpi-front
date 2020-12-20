@@ -32,7 +32,7 @@ export const Viewpage = () => {
             <span className="ml-2 flex">
               <span className="ml-2">
                 <select
-                  className={`font-semibold p-2 rounded-lg focus:outline-none tracking-wide capitalize ${color.text} `}
+                  className={`font-semibold p-2 rounded-lg focus:outline-none tracking-wide capitalize ${color.text} w-32`}
                   onChange={(e) => setFilter(e.target.value)}
                 >
                   <option

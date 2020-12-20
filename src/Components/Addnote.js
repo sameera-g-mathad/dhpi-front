@@ -9,6 +9,7 @@ export const Addnote = (props) => {
   const { color } = useContext(ColorContext);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [warning, setWarinig] = useState('');
   useEffect(() => {
     authenticated();
     // eslint-disable-next-line
@@ -45,12 +46,17 @@ export const Addnote = (props) => {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Input>
+          <span className="text-red-500 font-semibold capitalize tracking-wide">
+            {warning}
+          </span>
           <span className="flex justify-end my-2">
             <button
               onClick={() => {
-                addPosts(title, description, () =>
-                  props.history.push('/view_dairy')
-                );
+                if (title !== '' && description !== '')
+                  addPosts(title, description, () =>
+                    props.history.push('/view_dairy')
+                  );
+                else setWarinig('title and description cannot be empty');
               }}
               className={`${color.text} px-4 font-semibold tracking-wider capitalize focus:outline-none`}
             >
