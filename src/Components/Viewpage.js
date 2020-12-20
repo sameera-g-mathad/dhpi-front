@@ -4,27 +4,29 @@ import DairyContext from '../Context/dairyContext';
 import ColorContext from './../Context/colorContext';
 import './../App.css';
 import { Pages, Navbar } from './index';
-
+import { useHistory } from 'react-router-dom';
 export const Viewpage = () => {
   const { authenticated } = useContext(DairyContext);
   const { color } = useContext(ColorContext);
   const [sort, setSort] = useState(1);
   const [filter, setFilter] = useState('Today');
+  const history = useHistory();
   useEffect(() => {
     authenticated();
     // eslint-disable-next-line
+    return () => history.goForward();
   }, []);
 
   return (
     <>
       <Navbar />
-      <div className={`pr-2 ${color.bg} home-content`}>
+      <div className={`pr-2 ${color.bg} home-content overflow-x-hidden`}>
         <div>
           <span className="flex justify-end items-center py-2">
             <span>
               <Link
                 to="/add_note"
-                className={`font-semibold text-black capitalize focus:outline-none ${color.text} title hover:no-underline hover:${color.text}`}
+                className={`font-semibold  sm:text-md text-black capitalize focus:outline-none ${color.text} title hover:no-underline hover:${color.text}`}
               >
                 new thoughts ?
               </Link>
@@ -32,7 +34,7 @@ export const Viewpage = () => {
             <span className="ml-2 flex">
               <span className="ml-2">
                 <select
-                  className={`font-semibold p-2 rounded-lg focus:outline-none tracking-wide capitalize ${color.text} w-32`}
+                  className={`font-semibold p-2 rounded-lg focus:outline-none tracking-wide capitalize ${color.text} w-24`}
                   onChange={(e) => setFilter(e.target.value)}
                 >
                   <option

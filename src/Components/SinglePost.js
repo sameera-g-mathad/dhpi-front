@@ -11,7 +11,7 @@ export const SinglePost = (props) => {
   const [open, setOpen] = useState(false);
   const { el } = props;
   const { token } = state;
-  //const history = useHistory();
+  const history = useHistory();
   let description = [],
     arr = [],
     string = '';
@@ -82,14 +82,15 @@ export const SinglePost = (props) => {
           do you wish to delete "{el.title}"
         </ModalBody>
         <ModalFooter className={` ${color.bg}`}>
-          <button
+          <Link
+            href="hitory.go(0)"
             onClick={() => {
-              deletePost(el._id, () => window.location.reload(false));
+              deletePost(el._id, () => history.push('/delete_note'));
             }}
             className={`px-4 font-semibold tracking-wider capitalize ${color.text} focus:outline-none`}
           >
             confirm
-          </button>
+          </Link>
           <button
             className={`px-4 font-semibold tracking-wider capitalize ${color.text} focus:outline-none `}
             onClick={() => {
