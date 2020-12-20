@@ -18,7 +18,7 @@ export const Viewpage = () => {
   return (
     <>
       <Navbar />
-      <div className={`px-2 ${color.bg} home-content`}>
+      <div className={`pr-2 ${color.bg} home-content`}>
         <div>
           <span className="flex justify-end items-center py-2">
             <span>

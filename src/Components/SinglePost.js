@@ -11,7 +11,7 @@ export const SinglePost = (props) => {
   const [open, setOpen] = useState(false);
   const { el } = props;
   const { token } = state;
-  const history = useHistory();
+  //const history = useHistory();
   let description = [],
     arr = [],
     string = '';

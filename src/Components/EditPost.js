@@ -9,6 +9,7 @@ export const EditPost = (props) => {
   const { el, token } = props.history.location.state;
   const [title, setTitle] = useState(el.title);
   const [description, setDescription] = useState(el.description);
+  const [warning, setWarinig] = useState('');
   const { editPosts } = useContext(DairyContext);
   const { color } = useContext(ColorContext);
 
@@ -44,12 +45,17 @@ export const EditPost = (props) => {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Input>
+          <span className="text-red-500 font-semibold capitalize tracking-wide">
+            {warning}
+          </span>
           <span className="flex justify-end my-2">
             <button
               onClick={() => {
-                editPosts(token, el._id, { title, description }, () =>
-                  props.history.push('/view_dairy')
-                );
+                if (title !== '' && description !== '')
+                  editPosts(token, el._id, { title, description }, () =>
+                    props.history.push('/view_dairy')
+                  );
+                else setWarinig('title and description cannot be empty');
               }}
               className={`${color.text} px-4 font-semibold tracking-wider capitalize focus:outline-none`}
             >
