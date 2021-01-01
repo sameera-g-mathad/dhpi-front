@@ -60,7 +60,7 @@ export const DairyProvider = ({ children }) => {
       authenticated();
       const res = await axios.post('/add_note', {
         _id: state.token,
-        posts: { title, description },
+        posts: { title, description, time: new Date() },
       });
       if (res.status === 200) {
         navigate();

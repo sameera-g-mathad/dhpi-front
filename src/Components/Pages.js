@@ -11,6 +11,7 @@ export const Pages = (props) => {
   const { color } = useContext(ColorContext);
   const [loading, setLoading] = useState(true);
   let { posts } = state;
+  //filtering posts to match particular options
   if (props.filter === 'Today') {
     const filter = moment().format('D');
     posts = posts.filter((el) => {
@@ -36,10 +37,10 @@ export const Pages = (props) => {
       return null;
     });
   }
-
+  //sorting posts newest or oldest
   posts = posts.sort((a, b) => {
-    if (a.time > b.time) return props.sort;
-    else return -props.sort;
+    if (a.time > b.time) return -props.sort;
+    else return props.sort;
   });
   useEffect(() => {
     if (state.token !== '') getPosts(state.token);
@@ -47,6 +48,7 @@ export const Pages = (props) => {
     // eslint-disable-next-line
   }, [state.token]);
 
+  //setting loading color
   const setLoadingColor = () => {
     switch (color.text) {
       case 'text-blue-600':

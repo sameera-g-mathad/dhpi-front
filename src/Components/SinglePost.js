@@ -5,11 +5,13 @@ import DairyContext from '../Context/dairyContext';
 import ColorContext from './../Context/colorContext';
 import { Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
 import { Link, useHistory } from 'react-router-dom';
+import moment from 'moment';
 export const SinglePost = (props) => {
   const { state, deletePost } = useContext(DairyContext);
   const { color } = useContext(ColorContext);
   const [open, setOpen] = useState(false);
   const { el } = props;
+  console.log(el);
   const { token } = state;
   const history = useHistory();
   let description = [],
@@ -40,7 +42,7 @@ export const SinglePost = (props) => {
             <MdDelete />
           </button>
           <Link
-            className={`${color.text} focus:outline-none`}
+            className={`${color.text} focus:outline-none hover:${color.text}`}
             to={{
               pathname: '/edit_note',
               state: { el, id: token },
@@ -55,7 +57,12 @@ export const SinglePost = (props) => {
       >
         {arr.length === 0 ? el.description : string + '...'}
       </span>
-      <span className="flex justify-end">
+      <span className="flex justify-between items-center">
+        <span
+          className={`${color.text} font-bold text-xs tracking-wide capitalize`}
+        >
+          {moment(el.time).format('lll')}
+        </span>
         <Link
           to={{
             pathname: `/view_dairy/${el._id}`,
@@ -88,7 +95,7 @@ export const SinglePost = (props) => {
             onClick={() => {
               deletePost(el._id, () => history.push('/delete_note'));
             }}
-            className={`px-4 font-semibold tracking-wider capitalize ${color.text} focus:outline-none`}
+            className={`px-4 font-semibold tracking-wider capitalize ${color.text} focus:outline-none hover:${color.text} hover:no-underline`}
           >
             confirm
           </Link>
